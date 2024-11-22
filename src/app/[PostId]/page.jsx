@@ -22,31 +22,6 @@ const PageId = ({ params }) => {
     );
     const [products, loading, error] = useCollectionData(productQuery, { idField: 'id' });
 
-    // get Data from Firebase 
-    // const GetData = async () => {
-    //     setLoading(true);
-    //     try {
-    //         const querySnapshot = await getDocs(collection(db, "products"));
-    //         const docs = querySnapshot.docs.map((doc) => ({
-    //             id: doc.id,
-    //             ...doc.data()
-    //         }));
-    //         const filterData = docs.filter((it) => it.category === PostId);
-    //         setSortProduct(filterData);
-    //     } catch (error) {
-    //         console.error("Error fetching data: ", error);
-    //         setLoading(false);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
-
-    // // Fetch data on component mount
-    // useEffect(() => {
-    //     GetData();
-    // }, [PostId]);
-
-
     // Set loading
     if (loading) {
         return <Loading />
