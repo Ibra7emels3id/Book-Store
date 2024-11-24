@@ -6,19 +6,26 @@ import Loading from './components/Loading';
 import dynamic from 'next/dynamic';
 
 
-
+const Hero = dynamic(() => import('./components/Hero'), {
+    loading: () => <Loading />,
+});
+const Header = dynamic(() => import('./components/Header'), {
+    loading: () => <Loading />,
+});
+const Footer = dynamic(() => import('./components/Footer'), {
+    loading: () => <Loading />,
+});
+const HeroImage = dynamic(() => import('./components/HeroImage'), {
+    loading: () => <Loading />,
+});
+const Products = dynamic(() => import('./components/Products'), {
+    loading: () => <Loading />,
+});
 
 
 
 const Page = () => {
     const [user, loading, error] = useAuthState(auth);
-
-
-    const Hero = dynamic(() => import('./components/Hero'));
-    const Header = dynamic(() => import('./components/Header'));
-    const Footer = dynamic(() => import('./components/Footer'));
-    const HeroImage = dynamic(() => import('./components/HeroImage'));
-    const Products = dynamic(() => import('./components/Products'));
 
 
     if (error) {
