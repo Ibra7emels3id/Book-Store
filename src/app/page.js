@@ -11,6 +11,7 @@ import Products from './components/Products';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../FirebaseConfig';
 import Loading from './components/Loading';
+import Footer from './components/Footer';
 
 const Page = () => {
     const [user, loading, error] = useAuthState(auth);
@@ -29,6 +30,7 @@ const Page = () => {
             <Hero />
             <HeroImage />
             <Products />
+            <Footer />
         </>
     );
 }
