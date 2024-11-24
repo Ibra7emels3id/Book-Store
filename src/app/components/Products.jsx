@@ -57,7 +57,7 @@ const Products = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
                                 {products.map((it) => {
                                     return (
-                                        <div key={it.id} className="bg-gray-50 shadow-md overflow-hidden rounded-lg cursor-pointer hover:-translate-y-2 hover:border-greenbg border transition-all relative">
+                                        <Link href={`/store/${it.id}`} key={it.id} className="bg-gray-50 shadow-md overflow-hidden rounded-lg cursor-pointer hover:-translate-y-2 hover:border-greenbg border transition-all relative">
                                             <div className="bg-gray-100 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute top-3 right-3">
                                                 <Image src={'/assets/images/download-removebg-preview.png'} width={40} height={40} alt={"احدث الكتب"} />
                                             </div>
@@ -77,7 +77,7 @@ const Products = () => {
                                                 </div>
                                                 <Link href={'/'} className="text-lg text-center mt-5 text-green1 font-bold">{it.author}</Link>
                                             </div>
-                                        </div>
+                                        </Link>
                                     )
                                 })}
                             </div>

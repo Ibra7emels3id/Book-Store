@@ -33,7 +33,7 @@ const Category = () => {
 
     return (
         <>
-            <div className="category w-[22%] lg:flex hidden bg-white border py-5 px-1 gap-5 flex-col rounded-xl">
+            <div className="category min-w-[23%] lg:flex hidden bg-white border py-5 px-1 gap-5 flex-col rounded-xl">
                 <div className="flex items-center justify-between font-bold px-3">
                     <h3 className='text-2xl'>أقسام الكتب</h3>
                     <SearchIcon />

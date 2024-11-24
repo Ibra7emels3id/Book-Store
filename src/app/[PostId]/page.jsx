@@ -15,12 +15,33 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 const PageId = ({ params }) => {
     const decodedParams = use(params);
-    const PostId = decodeURIComponent(decodedParams.PostId); 
-    const productQuery = query(
-        collection(db, "products"),
-        where("category", "==", PostId)
-    );
-    const [products, loading, error] = useCollectionData(productQuery, { idField: 'id' });
+    const PostId = decodeURIComponent(decodedParams.PostId);
+    const [sortProduct, setSortProduct] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    // Get Data from Firebase Data 
+    const fetchData = async () => {
+        setLoading(true);
+        try {
+            const querySnapshot = await getDocs(collection(db, "products"));
+            const docs = querySnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            const filterData = docs.filter((it) => it.category === PostId)
+            setSortProduct(filterData)
+        } catch (error) {
+            console.error("Error getting documents: ", error);
+            setLoading(false);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Fetch data on page load and when PostId changes
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     // Set loading
     if (loading) {
@@ -49,9 +70,9 @@ const PageId = ({ params }) => {
                         </div>
                         <div className="font-[sans-serif] py-4 mx-auto w-full">
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
-                                {products?.map((it) => {
+                                {sortProduct?.map((it) => {
                                     return (
-                                        <div key={it.id} className="bg-gray-50 shadow-md overflow-hidden rounded-lg cursor-pointer hover:-translate-y-2 hover:border-greenbg border transition-all relative">
+                                        <Link href={`/store/${it.id}`} key={it.id} className="bg-gray-50 shadow-md overflow-hidden rounded-lg cursor-pointer hover:-translate-y-2 hover:border-greenbg border transition-all relative">
                                             <div className="bg-gray-100 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute top-3 right-3">
                                                 <Image src={'/assets/images/download-removebg-preview.png'} width={40} height={40} alt={"احدث الكتب"} />
                                             </div>
@@ -71,7 +92,7 @@ const PageId = ({ params }) => {
                                                 </div>
                                                 <Link href={'/'} className="text-lg text-center mt-5 text-green1 font-bold">{it?.author}</Link>
                                             </div>
-                                        </div>
+                                        </Link>
                                     )
                                 })}
                             </div>
