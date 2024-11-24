@@ -14,15 +14,15 @@ const Hero = () => {
                             محرك بحث الكتب بالذكاء الإصطناعي
                         </p>
                     </div>
-                    <div className="flex justify-center items-center w-[95%] md:w-[90%] lg:w-[60%] relative h-16">
+                    <div className="flex justify-center md:gap-2 items-center w-[95%] md:w-[90%] lg:w-[60%] relative h-16">
                         <input
-                            className="w-full outline-none border-none focus:outline-none h-full focus:ring-0  text-lg text-greenbg"
+                            className="w-full outline-none border-none px-3 focus:outline-none h-full focus:ring-0  text-lg text-greenbg rounded-full"
                             placeholder='البحث عن اسم الكتاب'
                             type="search"
                             name="name"
                             id="name"
                         />
-                        <button className=" md:absolute relative md:left-0 border text-white text-xl  border-white bg-greenbg w-[150px] h-full">
+                        <button className="absolute  left-0 border text-white text-xl border-white bg-greenbg w-[110px] md:w-[150px] h-full rounded-full">
                             بحث
                         </button>
                     </div>
