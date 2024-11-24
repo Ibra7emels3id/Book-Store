@@ -1,20 +1,25 @@
 'use client'
-import Link from 'next/link';
 import React from 'react';
-import Header from './components/Header';
-import { DarkThemeToggle, Flowbite } from 'flowbite-react';
-import Hero from './components/Hero';
-import HeroImage from './components/HeroImage';
-import ProductsSlider from './components/ProductsSlider';
-import About from './components/About';
-import Products from './components/Products';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../FirebaseConfig';
 import Loading from './components/Loading';
-import Footer from './components/Footer';
+import dynamic from 'next/dynamic';
+
+
+
+
+
 
 const Page = () => {
     const [user, loading, error] = useAuthState(auth);
+
+
+    const Hero = dynamic(() => import('./components/Hero'));
+    const Header = dynamic(() => import('./components/Header'));
+    const Footer = dynamic(() => import('./components/Footer'));
+    const HeroImage = dynamic(() => import('./components/HeroImage'));
+    const Products = dynamic(() => import('./components/Products'));
+
 
     if (error) {
         return <p>An error occurred: {error.message}</p>
@@ -26,7 +31,7 @@ const Page = () => {
 
     return (
         <>
-            <Header user={user} />
+            <Header />
             <Hero />
             <HeroImage />
             <Products />
