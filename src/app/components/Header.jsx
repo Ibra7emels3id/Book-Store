@@ -11,7 +11,7 @@ import { signOut } from 'firebase/auth';
 
 
 const Header = () => {
-    const [openModal, setOpenModal] = useState(false);
+    const [openModal, setOpenModal] = useState('hidden');
     const [user, loading, error] = useAuthState(auth);
 
     
@@ -19,7 +19,12 @@ const Header = () => {
     const HandleLogOut = () => {
         signOut(auth).then(() => {
             // Sign-out successful.
-            toast.success('تم تسجيل الخروج ')
+            toast.info('تم تسجيل الخروج ',{
+                position: 'bottom-center',
+                autoClose: 2000,
+                type:'info',
+                progress: undefined
+            })
         }).catch((error) => {
             // An error happened.
         });
@@ -53,7 +58,7 @@ const Header = () => {
                                 <Dropdown.Item onClick={HandleLogOut}>Sign out</Dropdown.Item>
                             </Dropdown>
                             : <button onClick={() => {
-                                setOpenModal(true)
+                                setOpenModal('fixed')
                             }} className='border px-3 py-2 rounded-lg text-green1 hover:text-white hover:bg-greenbg'>تسجيل الدخول</button>}
                     </div>
                     <NavbarToggle />
