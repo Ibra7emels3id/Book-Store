@@ -66,6 +66,18 @@ const DialogShowAddBook = ({ showDialog, HandleShowDialog }) => {
             console.log("Data Book Store Successfully Added", bookStore.id)
             HandleShowDialog()
             setFormSuccess('تم اضافه الكتاب الي قاعده البيانات أنتظر حتي يتم المراجعه من قبل المسؤال')
+            setFormData({
+                title: '',
+                numberPages: '',
+                typeFile: '',
+                author: '',
+                language: '',
+                image: null,
+                category: '',
+                ownership: '',
+                description: '',
+                pdf: null
+            })
         } catch (error) {
             console.error("Error adding document: ", error);
             setIsLoading(false)
