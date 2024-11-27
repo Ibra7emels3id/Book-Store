@@ -1,9 +1,12 @@
 'use client'
 import Image from 'next/image';
-import React from 'react';
-import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
+import Link from 'next/link';
+import React, { useState } from 'react';
+import { ParallaxProvider } from 'react-scroll-parallax';
+import DialogShowAddBook from './DialogShowAddBook';
 
 const HeroImage = () => {
+    const [showDialog, setShowDialog] = useState(false);
     // Add your image source here
     const imageSource = [
         {
@@ -32,6 +35,14 @@ const HeroImage = () => {
         },
     ]
 
+    // handle Show Dialog
+    const HandleShowDialog = () => {
+        if (showDialog === false) {
+            setShowDialog(true);
+        } else {
+            setShowDialog(false);
+        }
+    }
 
     return (
         <>
@@ -47,15 +58,16 @@ const HeroImage = () => {
                         })}
                     </div>
                     <div className="flex items-center justify-around w-[98%] md:w-[50%] m-auto mb-10">
-                        <button className='w-[150px] flex items-center justify-center bg-white  h-[70px] rounded-full text-green1 text-xl'>
+                        <Link href={'/store'} className='w-[150px] flex items-center justify-center bg-white  h-[70px] rounded-full text-green1 text-xl'>
                             شراء كتاب
-                        </button>
-                        <button className='w-[150px] flex items-center justify-center bg-white  h-[70px] rounded-full text-green1 text-xl'>
+                        </Link>
+                        <button onClick={HandleShowDialog} className='w-[150px] flex items-center justify-center bg-white  h-[70px] rounded-full text-green1 text-xl'>
                             نشر كتاب
                         </button>
                     </div>
                 </div>
             </ParallaxProvider>
+            <DialogShowAddBook HandleShowDialog={HandleShowDialog} showDialog={showDialog}  />
         </>
     );
 }
