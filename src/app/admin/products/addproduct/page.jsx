@@ -1,4 +1,4 @@
-import Header from '../../Components/Header';
+import Header from '@/app/components/Header';
 import Form from './_components/Form';
 
 const Page = () => {

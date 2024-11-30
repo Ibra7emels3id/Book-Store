@@ -26,16 +26,19 @@ export default function Home() {
         get(child(dbRef, `users/${userId}`)).then((snapshot) => {
             if (snapshot.exists()) {
                 console.log(snapshot.val());
-                if (snapshot.val()?.role === 'user') {
+                if (snapshot.val()?.role === 'user' || !userId) {
                     router.push('/')
+                }else{
+                    router.push('/admin')
                 }
             } else {
                 console.log("No data available");
+                router.push('/')
             }
         }).catch((error) => {
             console.error(error);
         });
-    }, [userId, router]);
+    }, [userId, router , user]);
 
     // set Loading
     if (loading) {
