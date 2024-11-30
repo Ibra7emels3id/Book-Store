@@ -1,8 +1,9 @@
 import { Modal, } from 'flowbite-react';
 import React, { useEffect, useState } from 'react';
-import { auth } from '../../../FirebaseConfig';
+import { auth, database } from '../../../FirebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { toast } from 'react-toastify';
+import { ref, set } from 'firebase/database';
 
 
 const Dialog = ({ openModal, setOpenModal }) => {
@@ -17,12 +18,25 @@ const Dialog = ({ openModal, setOpenModal }) => {
         e.preventDefault();
 
         try {
-            const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+            const data = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+            const userId = data?.user?.uid
 
             await updateProfile(auth.currentUser, {
                 displayName: formData.name,
                 photoURL: "https://example.com/jane-q-user/profile.jpg"
             });
+
+            function writeUserData() {
+                set(ref(database, 'users/' + userId), {
+                    username: formData.name,
+                    email: formData.email,
+                    role: 'user',
+                    date: new Date().toDateString(),
+                    time: new Date().toLocaleTimeString(),
+                    // profile_picture: imageUrl
+                });
+            }
+            writeUserData(userId);
 
             setOpenModal('hidden');
             setOpenResolt('login');

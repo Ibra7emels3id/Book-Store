@@ -13,8 +13,8 @@ import { signOut } from 'firebase/auth';
 const Header = () => {
     const [openModal, setOpenModal] = useState('hidden');
     const [user, loading, error] = useAuthState(auth);
-
     
+ 
     // handle Log Out User Account
     const HandleLogOut = () => {
         signOut(auth).then(() => {
@@ -51,11 +51,10 @@ const Header = () => {
                                     <span className="block text-sm">{user?.providerData[0].displayName}</span>
                                     <span className="block truncate text-sm font-medium">{user?.email}</span>
                                 </Dropdown.Header>
-                                <Dropdown.Item>Dashboard</Dropdown.Item>
-                                <Dropdown.Item>Settings</Dropdown.Item>
-                                <Dropdown.Item>Earnings</Dropdown.Item>
+                                <Dropdown.Item>المعاملات</Dropdown.Item>
+                                <Dropdown.Item>الطلبات</Dropdown.Item>
                                 <Dropdown.Divider />
-                                <Dropdown.Item onClick={HandleLogOut}>Sign out</Dropdown.Item>
+                                <Dropdown.Item onClick={HandleLogOut}>تسجيل الخروج</Dropdown.Item>
                             </Dropdown>
                             : <button onClick={() => {
                                 setOpenModal('fixed')
