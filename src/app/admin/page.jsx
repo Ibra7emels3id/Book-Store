@@ -1,6 +1,5 @@
 'use client'
 import Image from "next/image";
-import Header from "./Components/Header";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, database } from "../../../FirebaseConfig";
 import { useRouter } from "next/navigation";
@@ -11,6 +10,7 @@ import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 import Loading from "../components/Loading";
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import CategoryIcon from '@mui/icons-material/Category';
+import Header from "./components/Header";
 
 
 

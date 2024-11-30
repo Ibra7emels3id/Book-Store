@@ -1,6 +1,5 @@
 'use client'
 import React, { memo } from 'react';
-import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import CategoryIcon from '@mui/icons-material/Category';
 import Link from 'next/link';
 import { useAuthState } from 'react-firebase-hooks/auth';

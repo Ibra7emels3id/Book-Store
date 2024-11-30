@@ -1,13 +1,13 @@
 'use client'
 import Link from 'next/link';
 import React, { useState } from 'react';
-import Header from '../Components/Header';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
 import DialogDelProduct from './_components/DialogDelProduct';
 import Loading from '@/app/components/Loading';
 import { db } from '../../../../FirebaseConfig';
+import Header from '../components/Header';
 
 
 const Page = () => {
