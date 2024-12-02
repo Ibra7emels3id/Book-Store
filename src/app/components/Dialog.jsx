@@ -33,7 +33,7 @@ const Dialog = ({ openModal, setOpenModal }) => {
                     role: 'user',
                     date: new Date().toDateString(),
                     time: new Date().toLocaleTimeString(),
-                    // profile_picture: imageUrl
+                    image: 'https://example.com/jane-q-user/profile.jpg'
                 });
             }
             writeUserData(userId);

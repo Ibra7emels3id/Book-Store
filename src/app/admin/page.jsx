@@ -49,9 +49,9 @@ export default function Home() {
         <>
             <div className="flex">
                 <Header />
-                <div className="flex w-full ml-[50px] md:mr-[250px] mt-[70px] p-2 md:p-5">
+                <div className="flex w-full mr-[50px] md:mr-[250px] mt-[70px] p-2 md:p-5">
                     <div className="flex flex-col w-full m-auto">
-                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 w-full">
                             <div className="flex flex-col items-center justify-center gap-3 bg-white border py-5">
                                 <PeopleAltIcon sx={{ fontSize: '70px', color: '#3aaf9e' }} />
                                 <h1 className="text-5xl font-bold text-gray-600">234+</h1>
@@ -70,22 +70,7 @@ export default function Home() {
                             </div>
                         </div>
                         <div className="flex">
-                            <div className="flex-1">
-                                <h1 className="text-4xl font-bold text-gray-800">Welcome {user?.email}</h1>
-                            </div>
-                            <div className="flex-1 text-right">
-                                <button onClick={() => auth.signOut()} className="bg-gray-800 text-white py-2 px-4 rounded-md">Logout</button>
-                                {/* <Image
-                                    src={user?.photoURL}
-                                    alt={user?.email}
-                                    className="rounded-full w-24 h-24 object-cover"
-                                    layout="fixed"
-                                    
-                                    width={60}
-                                    
-                                    height={60}
-                                    /> */}
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

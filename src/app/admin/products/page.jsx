@@ -42,7 +42,7 @@ const Page = () => {
         } catch (error) {
             console.error("Error getting documents: ", error);
             setLoading(false)
-        } finally{
+        } finally {
             setLoading(false)
         }
     }
@@ -82,13 +82,19 @@ const Page = () => {
                                             العنوان
                                         </th>
                                         <th className="p-4 text-center text-sm font-medium text-white">
-                                            Email
+                                            التفاصيل
                                         </th>
                                         <th className="p-4 text-center text-sm font-medium text-white">
-                                            Role
+                                            التاريخ
                                         </th>
-                                        <th className="p-4 text-left text-sm font-medium text-white">
-                                            Actions
+                                        <th className="p-4 text-center text-sm font-medium text-white">
+                                            تعديل
+                                        </th>
+                                        <th className="p-4 text-center text-sm font-medium text-white">
+                                            حذف
+                                        </th>
+                                        <th className="p-4 text-center text-sm font-medium text-white">
+                                            تحميل
                                         </th>
                                     </tr>
                                 </thead>
@@ -115,8 +121,8 @@ const Page = () => {
                                                 <td className="p-4 text-sm text-center">
                                                     {it?.date}
                                                 </td>
-                                                <td className="p-4 h-full mt-4 flex items-center justify-between text-left">
-                                                    <button className="mr-4" title="Edit">
+                                                <td className="p-4 h-full block">
+                                                    <Link href={`/admin/products/Edit/${it.id}`} className="mr-4" title="Edit">
                                                         <svg xmlns="http://www.w3.org/2000/svg" className="w-5 fill-blue-500 hover:fill-blue-700"
                                                             viewBox="0 0 348.882 348.882">
                                                             <path
@@ -126,7 +132,9 @@ const Page = () => {
                                                                 d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z"
                                                                 data-original="#000000" />
                                                         </svg>
-                                                    </button>
+                                                    </Link>
+                                                </td>
+                                                <td className="p-4 h-full mt-4">
                                                     <button onClick={async () => {
                                                         handleClose(it.id)
                                                     }} type='submit' className="mr-4" title="Delete">
@@ -138,7 +146,9 @@ const Page = () => {
                                                                 data-original="#000000" />
                                                         </svg>
                                                     </button>
-                                                    <a href={it?.pdf} download className='bg-green1 text-white cursor-pointer w-[100px] h-10 flex items-center justify-center'>
+                                                </td>
+                                                <td className="p-4 h-full mt-4 text-center">
+                                                    <a href={it?.pdf} download className='bg-green1 text-white cursor-pointer w-[100px] m-auto h-10 flex items-center justify-center'>
                                                         تحميل ملف
                                                     </a>
                                                 </td>

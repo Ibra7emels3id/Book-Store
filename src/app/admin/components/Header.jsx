@@ -12,6 +12,9 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import PeopleIcon from '@mui/icons-material/People';
+import SpatialAudioOffIcon from '@mui/icons-material/SpatialAudioOff';
+
 
 
 const Header = () => {
@@ -57,6 +60,14 @@ const Header = () => {
                         </li>
                         <li className='w-full'>
                             <Link
+                                href="/admin/Users"
+                                className="text-black hover:text-green1 text-[15px] font-bold flex items-center hover:bg-white rounded px-4 py-3 transition-all"                            >
+                                <PeopleIcon />
+                                <span className=' hidden md:flex px-2'>المستخدمين</span>
+                            </Link>
+                        </li>
+                        <li className='w-full'>
+                            <Link
                                 href="/admin/products"
                                 className="text-black hover:text-green1 text-[15px] font-bold flex items-center hover:bg-white rounded px-4 py-3 transition-all"                            >
                                 <AddBusinessIcon />
@@ -65,10 +76,18 @@ const Header = () => {
                         </li>
                         <li className='w-full '>
                             <Link
-                                href="/category"
+                                href="/admin/category"
                                 className="text-black hover:text-green1 text-[15px] font-bold flex items-center hover:bg-white rounded px-4 py-3 transition-all"                            >
                                 <CategoryIcon />
                                 <span className=' hidden md:flex mx-2 text-lg'>أقسام الكتب</span>
+                            </Link>
+                        </li>
+                        <li className='w-full '>
+                            <Link
+                                href="/admin/author"
+                                className="text-black hover:text-green1 text-[15px] font-bold flex items-center hover:bg-white rounded px-4 py-3 transition-all"                            >
+                                <SpatialAudioOffIcon />
+                                <span className=' hidden md:flex mx-2 text-lg'>المؤلف</span>
                             </Link>
                         </li>
                         <li className='w-full'>
