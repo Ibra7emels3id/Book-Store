@@ -5,9 +5,9 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import { auth, database, db } from '../../../../FirebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
-import Loading from './_components/Loading';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { child, get, onValue, ref } from 'firebase/database';
+import Loading from '@/app/components/Loading';
 
 const Page = () => {
     const router = useRouter()
