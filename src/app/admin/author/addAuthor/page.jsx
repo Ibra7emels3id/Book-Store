@@ -1,12 +1,11 @@
 'use client'
-import { useRouter } from 'next/navigation';
-import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
-import React, { useState } from 'react';
-import { toast } from 'react-toastify';
-import Header from '../../components/Header';
-import { db } from '../../../../../FirebaseConfig';
+import { useRouter } from "next/navigation";
+import { db } from "../../../../../FirebaseConfig";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { useState } from "react";
 
-const page = () => {
+
+const Page = () => {
     const router = useRouter()
     const [loading, setLoading] = useState(false);
     const [product, setProduct] = useState({})
@@ -75,4 +74,4 @@ const page = () => {
     );
 }
 
-export default page;
+export default Page;
