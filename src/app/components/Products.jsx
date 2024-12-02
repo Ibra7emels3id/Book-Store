@@ -55,7 +55,7 @@ const Products = () => {
                             </div>
                         </div>
                         <div className="font-[sans-serif] py-4 mx-auto w-full">
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-6 w-full">
                                 {products.map((it) => {
                                     return (
                                         <Link href={`/store/${it.id}`} key={it.id} className="bg-gray-50 shadow-md overflow-hidden rounded-lg cursor-pointer hover:-translate-y-2 hover:border-greenbg border transition-all relative">
@@ -68,7 +68,7 @@ const Products = () => {
                                                     width={100}
                                                     height={100}
                                                     alt="Product 1"
-                                                    className="h-full min-w-40 mt-5 w-full object-contain"
+                                                    className="h-full min-w-40 mt-0 md:mt-5 w-full object-contain"
                                                 />
                                             </div>
                                             <div className="p-6 bg-white">
