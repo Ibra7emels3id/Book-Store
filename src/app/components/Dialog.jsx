@@ -98,12 +98,50 @@ const Dialog = ({ openModal, setOpenModal }) => {
                     type: 'success',
                     progress: undefined
                 })
-                // ...
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                // ..
+                if (errorCode === "auth/invalid-email") {
+                    return toast.error('البريد غير مسجل', {
+                        position: 'bottom-center',
+                        autoClose: 3000,
+                        type: 'error'
+                    });
+                }
+                if (errorCode === "auth/wrong-password") {
+                    return toast.error('تحقق من كلمة المرور', {
+                        position: 'bottom-center',
+                        autoClose: 3000,
+                        type: 'error'
+                    });
+                }
+                if (errorCode === "auth/user-not-found") {
+                    return toast.error('البريد غير مسجل', {
+                        position: 'bottom-center',
+                        autoClose: 3000,
+                        type: 'error'
+                    });
+                }
+                if(errorMessage === 'auth/invalid-credential'){
+                    return toast.error('تحقق من البيانات او الاتصال من الانترنت', {
+                        position: 'bottom-center',
+                        autoClose: 3000,
+                        type: 'error'
+                    });
+                }
+                if (errorMessage === 'auth/too-many-requests') {
+                    return toast.error('عذر��ا، عدد الحاولات التي تم فيها أكثر من مرة كبيرا. يرجى المحاولة مرة أخرى بعد عدة دقا��ق.',{
+                        position: 'bottom-center',
+                        autoClose: 3000,
+                        type: 'error'
+                    })
+                }
+                toast.error('حدث خطا أثناء التسجيل حاول مره اخري ', {
+                    position: 'bottom-center',
+                    autoClose: 3000,
+                    type: 'error'
+                })
                 setTimeout(() => {
                     setError({
                         email: '', password: '', name: ''

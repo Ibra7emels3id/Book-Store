@@ -49,9 +49,9 @@ const DialogShowAddBook = ({ showDialog, HandleShowDialog }) => {
             await uploadBytes(pdfRef, formData.pdf)
             const pdfURL = await getDownloadURL(pdfRef);
 
-            const bookStore = await addDoc(collection(db, '/bookStoreClint'), {
+            const bookStore = await addDoc(collection(db, 'order'), {
                 title: formData.title,
-                numberPages: formData.numberPages,
+                namePages: formData.numberPages,
                 typeFile: formData.typeFile,
                 author: formData.author,
                 language: formData.language,
@@ -59,6 +59,7 @@ const DialogShowAddBook = ({ showDialog, HandleShowDialog }) => {
                 category: formData.category,
                 ownership: formData.ownership,
                 description: formData.description,
+                count: formData.count,
                 pdf: pdfURL,
                 date: new Date().toDateString(),
                 time: new Date().toLocaleTimeString()
@@ -208,6 +209,14 @@ const DialogShowAddBook = ({ showDialog, HandleShowDialog }) => {
                             name='numberPages'
                             type="number"
                             placeholder="أدخل عدد صفحات الكتاب"
+                            className='h-12 px-3 w-full mt-4 focus:ring-0 outline-none focus:outline-none focus:border-green-500 border'
+                        />
+                        <input
+                            onChange={handleChangeEvent}
+                            value={formData.count}
+                            name='count'
+                            type="number"
+                            placeholder="أدخل عدد الكتب "
                             className='h-12 px-3 w-full mt-4 focus:ring-0 outline-none focus:outline-none focus:border-green-500 border'
                         />
                         <input

@@ -2,15 +2,17 @@ import React, { memo, useCallback } from 'react';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../../../../../FirebaseConfig';
 
-const DialogDelProduct = ({ open, handleClose, currentId, GetData }) => {
+const DialogCategory = ({ open, handleClose, currentId, GetData }) => {
+
 
     // handle delete item from fireStore
     const handleDeleteItem = async () => {
         // Your delete item logic here
-        await deleteDoc(doc(db, "order", currentId));
+        await deleteDoc(doc(db, "category", currentId));
         handleClose();
         GetData()
     }
+
 
     return (
         <>
@@ -47,7 +49,7 @@ const DialogDelProduct = ({ open, handleClose, currentId, GetData }) => {
                             />
                         </svg>
                         <h4 className="text-gray-800 text-2xl font-bold mt-4">
-                            هل تريد حذف المنتج ؟
+                            هل تريد حذف هذا القسم ؟
                         </h4>
                         <div className="flex items-center justify-around gap-5 space-x-4 mt-8">
                             <button
@@ -62,7 +64,7 @@ const DialogDelProduct = ({ open, handleClose, currentId, GetData }) => {
                                 type="button"
                                 className="px-4 py-2 w-full rounded-lg text-gray-800 text-lg bg-gray-200 hover:bg-gray-300 active:bg-gray-200"
                             >
-                                ألغاء
+                                الغاء
                             </button>
                         </div>
                     </div>
@@ -72,4 +74,4 @@ const DialogDelProduct = ({ open, handleClose, currentId, GetData }) => {
     );
 }
 
-export default memo(DialogDelProduct);
+export default memo(DialogCategory);

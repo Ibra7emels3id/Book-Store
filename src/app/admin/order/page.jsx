@@ -32,7 +32,7 @@ const Page = () => {
     const GetData = async () => {
         try {
             setLoading(true)
-            const querySnapshot = await getDocs(collection(db, "/bookStoreClint"));
+            const querySnapshot = await getDocs(collection(db, "order"));
             const docs = querySnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data()
@@ -131,7 +131,7 @@ const Page = () => {
                                                     {it.time}
                                                 </td>
                                                 <td className="p-4 h-full text-center">
-                                                    <button className="" title="Edit">
+                                                    <button className="" title="تعديل">
                                                         <svg xmlns="http://www.w3.org/2000/svg" className="w-5 fill-blue-500 hover:fill-blue-700"
                                                             viewBox="0 0 348.882 348.882">
                                                             <path
@@ -143,21 +143,20 @@ const Page = () => {
                                                         </svg>
                                                     </button>
                                                 </td>
-
                                                 <td>
-                                                    <a href={it?.pdf} target='_blank' download className=' text-green-500 hover:text-green-700 font-bold cursor-pointer  h-10 flex items-center justify-center'>
+                                                    <a title='مشاهدة' href={it?.pdf} target='_blank' download className=' text-green-500 hover:text-green-700 font-bold cursor-pointer  h-10 flex items-center justify-center'>
                                                         <ArrowCircleDownIcon />
                                                     </a>
                                                 </td>
                                                 <td className=''>
-                                                    <Link href={it?.pdf} className='text-blue-500 hover:text-blue-700 font-bold cursor-pointer w-full  h-10 flex items-center justify-center'>
+                                                    <Link title='أضافة الي القائمة' href={`/admin/order/CreateOrder/${it.id}`} className='text-blue-500 hover:text-blue-700 font-bold cursor-pointer w-full  h-10 flex items-center justify-center'>
                                                         أضافة
                                                     </Link>
                                                 </td>
                                                 <td className='text-center'>
                                                     <button onClick={async () => {
                                                         handleClose(it.id)
-                                                    }} type='submit' className="text-center" title="Delete">
+                                                    }} type='submit' className="text-center" title="حذف">
                                                         <svg xmlns="http://www.w3.org/2000/svg" className="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
                                                             <path
                                                                 d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"

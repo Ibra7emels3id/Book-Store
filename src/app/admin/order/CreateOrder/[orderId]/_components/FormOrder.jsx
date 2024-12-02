@@ -1,14 +1,14 @@
 'use client'
-import { addDoc, collection, doc, getDoc, getDocs, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { Button, Rating } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { toast } from 'react-toastify';
-import { db, storage } from '../../../../../../../FirebaseConfig';
 import styled from 'styled-components';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { db } from '../../../../../../../FirebaseConfig';
 
 
 const VisuallyHiddenInput = styled('input')({
@@ -23,7 +23,7 @@ const VisuallyHiddenInput = styled('input')({
     width: 1,
 });
 
-const FormEdit = ({ Id }) => {
+const FormOrder = ({ Id }) => {
     const router = useRouter()
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState(false);
@@ -33,6 +33,7 @@ const FormEdit = ({ Id }) => {
     const [author, setAuthor] = useState([])
 
 
+    console.log(product);
 
     // handle Change event
     const handleInputChange = (e) => {
@@ -72,8 +73,7 @@ const FormEdit = ({ Id }) => {
             }
 
             // update data to firestore
-            const docRef = doc(db, 'products', Id)
-            await updateDoc(docRef, {
+            const bookStore = await addDoc(collection(db, 'products'), {
                 ...product,
                 image: image,
                 pdf: pdf,
@@ -81,11 +81,12 @@ const FormEdit = ({ Id }) => {
                 time: new Date().toLocaleTimeString()
             });
 
-            console.log("Document written with ID: ", docRef.id);
-            toast.success('تم التحديث بنجاح', {
+            console.log("Document written with ID: ", bookStore.id);
+            toast.success('تم الاضافة بنجاح', {
                 position: 'bottom-left',
                 autoClose: 2000,
             })
+            await deleteDoc(doc(db, "order", Id));
             router.push('/admin/products');
         } catch (e) {
             console.error("Error adding document: ", e);
@@ -100,7 +101,7 @@ const FormEdit = ({ Id }) => {
         // Fetch the product
         const fetchProduct = async () => {
             try {
-                const docRef = doc(db, "products", Id);
+                const docRef = doc(db, "order", Id);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     const data = docSnap.data();
@@ -160,10 +161,10 @@ const FormEdit = ({ Id }) => {
     return (
         <>
             <form onSubmit={handleSubmit} className='w-full'>
-                <input onChange={handleInputChange} value={product.title} className='h-12 focus:ring-0 focus:border-green-500 px-3 w-full outline-none focus:outline-none border' type="text" name="title" id="title" placeholder='أدخل العنوان' />
-                <input onChange={handleInputChange} value={product.count} className='h-12 focus:ring-0 focus:border-green-500 px-3 w-full mt-4 outline-none focus:outline-none border' type="number" name="count" id="count" placeholder='أدخل عدد المنتج' />
-                <input onChange={handleInputChange} value={product.namePages} className='h-12 focus:ring-0 focus:border-green-500 px-3 w-full mt-4 outline-none focus:outline-none border' type="number" name="namePages" id="namePages" placeholder='أدخل عدد الصفحات الخاصه بالمنتج' />
-                <input onChange={handleInputChange} value={product.typeFile} className='h-12 focus:ring-0 focus:border-green-500 px-3 w-full mt-4 outline-none focus:outline-none border' type="text" name="typeFile" id="typeFile" placeholder='نوع الملف' />
+                <input onChange={handleInputChange} value={product?.title} className='h-12 focus:ring-0 focus:border-green-500 px-3 w-full outline-none focus:outline-none border' type="text" name="title" id="title" placeholder='أدخل العنوان' />
+                <input onChange={handleInputChange} value={product?.count} className='h-12 focus:ring-0 focus:border-green-500 px-3 w-full mt-4 outline-none focus:outline-none border' type="number" name="count" id="count" placeholder='أدخل عدد المنتج' />
+                <input onChange={handleInputChange} value={product?.namePages} className='h-12 focus:ring-0 focus:border-green-500 px-3 w-full mt-4 outline-none focus:outline-none border' type="number" name="namePages" id="namePages" placeholder='أدخل عدد الصفحات الخاصه بالمنتج' />
+                <input onChange={handleInputChange} value={product?.typeFile} className='h-12 focus:ring-0 focus:border-green-500 px-3 w-full mt-4 outline-none focus:outline-none border' type="text" name="typeFile" id="typeFile" placeholder='نوع الملف' />
                 <Rating style={{ direction: 'ltr' }} onChange={handleInputChange} className='mt-5 px-2 z-10' name='rating' value={product?.rating || 0} size="large" />
                 <select onChange={(e) => {
                     setProduct({ ...product, category: e.target.value });
@@ -241,10 +242,10 @@ const FormEdit = ({ Id }) => {
                             d="M12 22c5.421 0 10-4.579 10-10h-2c0 4.337-3.663 8-8 8s-8-3.663-8-8c0-4.336 3.663-8 8-8V2C6.579 2 2 6.58 2 12c0 5.421 4.579 10 10 10z"
                             data-original="#000000" />
                     </svg>
-                </p> : <button type='submit' className='w-full h-12 px-6 text-white text-base font-semibold bg-green1 hover:bg-green2 rounded-md mt-8'>تحديث المنتج </button>}
+                </p> : <button type='submit' className='w-full h-12 px-6 text-white text-base font-semibold bg-green1 hover:bg-green2 rounded-md mt-8'>أضافة الي القائمة</button>}
             </form>
         </>
     );
 }
 
-export default FormEdit;
+export default FormOrder;
