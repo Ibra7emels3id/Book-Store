@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { db } from "../../../../../FirebaseConfig";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { useState } from "react";
+import Header from "../../components/Header";
 
 
 const Page = () => {
