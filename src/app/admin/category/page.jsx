@@ -1,12 +1,12 @@
 'use client'
 import React, { useState } from 'react';
-import Header from '../Components/Header';
 import { useRouter } from 'next/navigation';
 import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../../../../FirebaseConfig';
 import Loading from '@/app/components/Loading';
 import DialogCategory from './_components/DialogCategory';
+import Header from '../components/Header';
 
 const Page = () => {
     const [open, setOpen] = useState('hidden')
