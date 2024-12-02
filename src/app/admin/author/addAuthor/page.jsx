@@ -54,7 +54,7 @@ const Page = () => {
         <>
             <div className="flex">
                 <Header />
-                <div className="flex w-full ml-[50px] md:mr-[250px] mt-[70px] p-2 md:p-12">
+                <div className="flex w-full mr-[50px] md:mr-[250px] mt-[70px] p-2 md:p-12">
                     <div className="flex flex-col w-full md:w-[80%] m-auto">
                         <h2 className="text-2xl font-bold text-center mb-4">أضافه مؤلف جديد</h2>
                         <form onSubmit={handleSubmit} className='w-full'>
