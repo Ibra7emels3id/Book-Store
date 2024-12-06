@@ -1,16 +1,16 @@
 'use client'
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
-import { db } from '../../../FirebaseConfig';
 import { Rating } from '@mui/material';
 import Link from 'next/link';
-import Category from './Category';
-import ButtonSherlock from './ButtonSherlock';
+import { db } from '../../../../../FirebaseConfig';
+import Category from '@/app/components/Category';
+import ButtonSherlock from '@/app/components/ButtonSherlock';
 
 
-const Products = () => {
-    const [products, setProducts] = React.useState([]);
+const FilterProducts = () => {
+    const [products, setProducts] = useState([]);
 
     // fetch products
     const GetData = async () => {
@@ -20,7 +20,15 @@ const Products = () => {
             id: doc.id,
             ...doc.data()
         }));
-        setProducts(docs)
+        // Filter Data TO today only
+        const today = new Date();
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(today.getDate() - 30);
+        const filteredData = docs.filter(doc => {
+            const docDate = new Date(doc.date);
+            return docDate >= thirtyDaysAgo && docDate <= today;
+        });
+        setProducts(filteredData);;
     }
 
 
@@ -30,6 +38,7 @@ const Products = () => {
     }, [])
 
 
+
     return (
         <>
             <div className='w-[95%] lg:w-[90%] m-auto mt-10 px-1'>
@@ -37,7 +46,7 @@ const Products = () => {
                     <div className="flex flex-col w-full lg:w-[83%]">
                         <ButtonSherlock />
                         <div className="font-[sans-serif] py-4 mx-auto w-full">
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-6 w-full">
+                            {products.length > 0 ? <div className="grid grid-cols-2 md:grid-cols-3 gap-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-4 w-full">
                                 {products.map((it) => {
                                     return (
                                         <Link href={`/store/${it.id}`} key={it.id} className="bg-gray-50 shadow-md overflow-hidden rounded-lg cursor-pointer hover:-translate-y-2 hover:border-greenbg border transition-all relative">
@@ -63,7 +72,9 @@ const Products = () => {
                                         </Link>
                                     )
                                 })}
-                            </div>
+                            </div> : <div className='text-center my-5'>
+                                <h3 className='text-2xl font-bold text-green-500'>لم يتم نشر بيانات اليوم</h3>
+                            </div>}
                         </div>
                     </div>
                     <Category />
@@ -73,4 +84,4 @@ const Products = () => {
     );
 }
 
-export default Products;
+export default FilterProducts;

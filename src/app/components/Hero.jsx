@@ -101,13 +101,13 @@ const Hero = () => {
                         }
                     </div>
                     <div className="flex gap-5 mt-10 flex-wrap m-auto items-center justify-center">
-                        <Link href="/books" className='border h-10 w-36 flex items-center justify-center rounded-xl text-white'>
+                        <Link href="/products/lastbooks" className='border h-10 w-36 flex items-center justify-center rounded-xl text-white'>
                             أحدث الكتب
                         </Link>
-                        <Link href="/authors" className='border h-10 w-36 flex items-center justify-center rounded-xl text-white'>
+                        <Link href="/products/verified" className='border h-10 w-36 flex items-center justify-center rounded-xl text-white'>
                             أشهر الكتب
                         </Link>
-                        <Link href="/authors" className='border h-10 w-36 flex items-center justify-center rounded-xl text-white'>
+                        <Link href="/products/filtertoday" className='border h-10 w-36 flex items-center justify-center rounded-xl text-white'>
                             الأشهر اليوم
                         </Link>
                     </div>

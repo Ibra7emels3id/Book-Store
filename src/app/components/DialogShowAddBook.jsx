@@ -1,10 +1,12 @@
 import { addDoc, collection, getDocs } from 'firebase/firestore';
 import React, { useEffect, useRef, useState } from 'react';
-import { db, storage } from '../../../FirebaseConfig';
+import { auth, db, storage } from '../../../FirebaseConfig';
 import { Button, styled } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Image from 'next/image';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import Link from 'next/link';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -27,6 +29,9 @@ const DialogShowAddBook = ({ showDialog, HandleShowDialog }) => {
     const dropdownMenuRef = useRef(null);
     const [isLoading, setIsLoading] = useState(false);
     const [formSuccess, setFormSuccess] = useState('');
+    const [user , error , loading ] = useAuthState(auth)
+
+
 
     // Handle Change events
     const handleChangeEvent = (e) => {
@@ -61,6 +66,9 @@ const DialogShowAddBook = ({ showDialog, HandleShowDialog }) => {
                 description: formData.description,
                 count: formData.count,
                 pdf: pdfURL,
+                userId: user.uid,
+                userEmail: user.email,
+                status: 'أنتظار',
                 date: new Date().toDateString(),
                 time: new Date().toLocaleTimeString()
             })
@@ -162,6 +170,7 @@ const DialogShowAddBook = ({ showDialog, HandleShowDialog }) => {
                         {formSuccess}
                     </p>
                 </div>
+                <Link className='w-full bg-green-600 hover:bg-green-700 py-3 block text-center rounded-xl text-white font-semibold' href={'/order'}>المعاملات</Link>
             </div>
         </div>
     }
